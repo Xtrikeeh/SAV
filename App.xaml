@@ -4,6 +4,69 @@
              xmlns:local="clr-namespace:SAV"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
+        
+        <!-- Cores principais-->
+        <SolidColorBrush x:Key="azulClaro" Color="#00BBFF" />
+        <SolidColorBrush x:Key="azulEscuro" Color="#1C2639" />
+        <SolidColorBrush x:Key="verdeNeon" Color="#00FFAE" />
+        <SolidColorBrush x:Key="cinza" Color="#D4D4D4" />
+        <SolidColorBrush x:Key="preto" Color="#1B1B1B" />
+        <SolidColorBrush x:Key="branco" Color="#F5F5F5" />
+        
+        <!-- Cores semânticas-->
+        <SolidColorBrush x:Key="verdeSemantico" Color="#22C55E" />
+        <SolidColorBrush x:Key="amareloSemantico" Color="#FACC15" />
+        <SolidColorBrush x:Key="vermelhoSemantico" Color="#EF4444" />
+        
+        <!-- Fonte -->
+        <FontFamily x:Key="fontePadrao">Segoe UI</FontFamily>
+        
+        <!-- Efeito: opções menu superior -->
+        <Style x:Key="efeitoOpcoes" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource azulEscuro}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource azulClaro}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
+        <!-- Efeito: opções ferramentas -->
+        <Style x:Key="fundoGridFerramentas" TargetType="Grid">
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
+                    <Setter Property="Background" Value="{StaticResource azulClaro}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="efeitoEditar" TargetType="Path">
+            <Setter Property="Fill" Value="{StaticResource azulEscuro}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}}" Value="True">
+                    <Setter Property="Fill" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="efeitoAdicionar" TargetType="Path">
+            <Setter Property="Stroke" Value="{StaticResource azulEscuro}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}}" Value="True">
+                    <Setter Property="Stroke" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="efeitoDeletar" TargetType="Path">
+            <Setter Property="Fill" Value="{StaticResource azulEscuro}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}}" Value="True">
+                    <Setter Property="Fill" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>
