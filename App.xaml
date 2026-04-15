@@ -6,13 +6,13 @@
     <Application.Resources>
         
         <!-- Cores principais-->
-        <SolidColorBrush x:Key="azulClaro" Color="#00BBFF" />
-        <SolidColorBrush x:Key="azulEscuro" Color="#1C2639" />
-        <SolidColorBrush x:Key="verdeNeon" Color="#00FFAE" />
-        <SolidColorBrush x:Key="cinza" Color="#D4D4D4" />
-        <SolidColorBrush x:Key="preto" Color="#1B1B1B" />
-        <SolidColorBrush x:Key="branco" Color="#F5F5F5" />
-        
+        <SolidColorBrush x:Key="corTemaPrimaria" Color="#00BBFF" />
+        <SolidColorBrush x:Key="corTemaSecundaria" Color="#1C2639" />
+        <SolidColorBrush x:Key="corTemaTerciaria" Color="#00FFAE" />
+        <SolidColorBrush x:Key="corDestaquePrimaria" Color="#F5F5F5" />
+        <SolidColorBrush x:Key="corDestaqueSecundaria" Color="#1B1B1B" />
+        <SolidColorBrush x:Key="corDestaqueTerciaria" Color="#D4D4D4" />
+
         <!-- Cores semânticas-->
         <SolidColorBrush x:Key="verdeSemantico" Color="#22C55E" />
         <SolidColorBrush x:Key="amareloSemantico" Color="#FACC15" />
@@ -20,14 +20,15 @@
         
         <!-- Fonte -->
         <FontFamily x:Key="fontePadrao">Segoe UI</FontFamily>
-        
+        <SolidColorBrush x:Key="corFonte" Color="#1C2639" />
+
         <!-- Efeito: opções menu superior -->
         <Style x:Key="efeitoOpcoes" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{StaticResource azulEscuro}"/>
+            <Setter Property="Foreground" Value="{DynamicResource corFonte}"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="{StaticResource azulClaro}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource corTemaPrimaria}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -37,36 +38,62 @@
             <Setter Property="Background" Value="Transparent"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
-                    <Setter Property="Background" Value="{StaticResource azulClaro}"/>
+                    <Setter Property="Background" Value="{DynamicResource corTemaPrimaria}"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="efeitoEditar" TargetType="Path">
-            <Setter Property="Fill" Value="{StaticResource azulEscuro}"/>
+            <Setter Property="Fill" Value="{DynamicResource corFonte}"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}}" Value="True">
-                    <Setter Property="Fill" Value="White"/>
+                    <Setter Property="Fill" Value="#F5F5F5"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="efeitoAdicionar" TargetType="Path">
-            <Setter Property="Stroke" Value="{StaticResource azulEscuro}"/>
+            <Setter Property="Stroke" Value="{DynamicResource corFonte}"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}}" Value="True">
-                    <Setter Property="Stroke" Value="White"/>
+                    <Setter Property="Stroke" Value="#F5F5F5"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="efeitoDeletar" TargetType="Path">
-            <Setter Property="Fill" Value="{StaticResource azulEscuro}"/>
+            <Setter Property="Fill" Value="{DynamicResource corFonte}"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}}" Value="True">
-                    <Setter Property="Fill" Value="White"/>
+                    <Setter Property="Fill" Value="#F5F5F5"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="corBotaoTema" TargetType="ToggleButton">
+            <Setter Property="Background" Value="{DynamicResource corTemaPrimaria}" />
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource corTemaSecundaria}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="botoesPadrao" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource corTemaPrimaria}"/>
+            <Setter Property="FontFamily" Value="{DynamicResource fontePadrao}" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Foreground" Value="{DynamicResource corFonte}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="{DynamicResource fontePadrao}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource corTemaSecundaria}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
     </Application.Resources>
 </Application>

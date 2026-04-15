@@ -6,8 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAV"
         mc:Ignorable="d"
-        Title="Sistema de Alterações de Vias" Height="450" Width="800">
-    <Grid Background="{StaticResource azulEscuro}">
+        Title="Sistema de Alterações de Vias">
+    <Grid Background="{DynamicResource corDestaquePrimaria}">
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
             <RowDefinition/>
@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         
         <!-- Menu superior -->
-        <Grid Grid.Row="0" Background="{StaticResource branco}">
+        <Grid Grid.Row="0" Background="{DynamicResource corDestaquePrimaria}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="10"/>
@@ -26,7 +26,7 @@
                 <Image Source="/Assets/sav_icon.png" Margin="12"/>
             </Grid>
             <Grid Grid.Column="1">
-                <Rectangle Fill="{StaticResource azulClaro}" Width="4" Height="50" />
+                <Rectangle Fill="{DynamicResource corTemaPrimaria}" Width="4" Height="50" />
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
@@ -37,15 +37,15 @@
 
                 <TextBlock MouseDown="AbrirMapa_MouseDown" Grid.Column="0" Text="Abrir/Criar" FontSize="18"
                            HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Style="{StaticResource efeitoOpcoes}" Cursor="Hand"/>
-
-                <TextBlock Grid.Column="1" Text="Configurações" FontSize="18"
+                           Style="{DynamicResource efeitoOpcoes}" Cursor="Hand"/>
+                
+                <TextBlock MouseDown="AbrirConfiguracoes_MouseDown" x:Name="abrirConfiguracoes" Grid.Column="1" Text="Configurações" FontSize="18"
                            HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Style="{StaticResource efeitoOpcoes}"/>
+                           Style="{DynamicResource efeitoOpcoes}"/>
 
                 <TextBlock Grid.Column="2" Text="Ajuda" FontSize="18"
                            HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Style="{StaticResource efeitoOpcoes}" Cursor="Hand"/>
+                           Style="{DynamicResource efeitoOpcoes}" Cursor="Hand"/>
             </Grid>
         </Grid>
         
@@ -57,7 +57,7 @@
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Background="{StaticResource cinza}">
+            <Grid Grid.Column="0" Background="{DynamicResource corDestaqueTerciaria}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
                     <RowDefinition Height="70" />
@@ -73,9 +73,9 @@
                                  Cursor="Hand">
                         <RadioButton.Template>
                             <ControlTemplate TargetType="RadioButton">
-                                <Grid Style="{StaticResource fundoGridFerramentas}" Margin="0, 0, -10, 0">
+                                <Grid Style="{DynamicResource fundoGridFerramentas}" Margin="0, 0, -10, 0">
                                     <Viewbox Width="30" Height="30">
-                                        <Path Style="{StaticResource efeitoEditar}"
+                                        <Path Style="{DynamicResource efeitoEditar}"
                                               Data="M3.3572 3.23397C3.66645 2.97447 4.1014 
                                               2.92638 4.45988 3.11204L20.7851 11.567C21.1426 
                                               11.7522 21.3542 12.1337 21.322 12.5351C21.2898 
@@ -102,9 +102,9 @@
                                  Cursor="Hand">
                         <RadioButton.Template>
                             <ControlTemplate TargetType="RadioButton">
-                                <Grid Style="{StaticResource fundoGridFerramentas}" Margin="0, 0, -10, 0">
+                                <Grid Style="{DynamicResource fundoGridFerramentas}" Margin="0, 0, -10, 0">
                                     <Viewbox Width="30" Height="30">
-                                        <Path Style="{StaticResource efeitoAdicionar}"
+                                        <Path Style="{DynamicResource efeitoAdicionar}"
                                               Data="M4 12H20M12 4V20"
                                               StrokeThickness="2" 
                                               Stretch="Uniform">
@@ -123,9 +123,9 @@
                                  Cursor="Hand">
                         <RadioButton.Template>
                             <ControlTemplate TargetType="RadioButton">
-                                <Grid Style="{StaticResource fundoGridFerramentas}" Margin="0, 0, -10, 0">
+                                <Grid Style="{DynamicResource fundoGridFerramentas}" Margin="0, 0, -10, 0">
                                     <Viewbox Width="30" Height="30" Cursor="">
-                                        <Path Style="{StaticResource efeitoDeletar}"
+                                        <Path Style="{DynamicResource efeitoDeletar}"
                                               Data="M5.29289 5.29289C5.68342 4.90237 
                                               6.31658 4.90237 6.70711 5.29289L12 
                                               10.5858L17.2929 5.29289C17.6834 4.90237 
@@ -158,20 +158,20 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Polyline Points="{Binding Pontos}" Stroke="#00BBFF" StrokeThickness="4" 
+                            <Polyline Points="{Binding Pontos}" Stroke="{DynamicResource corTemaPrimaria}" StrokeThickness="4" 
                               Cursor="Hand" MouseDown="Via_MouseDown" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </Grid>
-            
-            <Grid Grid.Column="2" Background="{StaticResource cinza}">
+
+            <Grid Grid.Column="2" Background="{DynamicResource corDestaqueTerciaria}">
                 
             </Grid>
         </Grid>
 
         <!-- Menu inferior-->
-        <Grid Grid.Row="2" Background="{StaticResource branco}">
+        <Grid Grid.Row="2" Background="{DynamicResource corDestaquePrimaria}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition/>
@@ -186,7 +186,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <Grid Background="{StaticResource cinza}" Margin="8">
+                <Grid Background="{DynamicResource corDestaqueTerciaria}" Margin="8">
                     
                 </Grid>
             </Grid>
