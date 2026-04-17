@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAV"
         mc:Ignorable="d"
-        Title="Sistema de Alterações de Vias">
+        Title="Sistema de Alterações de Vias" 
+        WindowStartupLocation="CenterScreen">
     <Grid Background="{DynamicResource corDestaquePrimaria}">
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
@@ -30,15 +31,25 @@
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="90"/>
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="70"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Abrir/Criar" FontSize="18"
+                <TextBlock Grid.Column="0" Text="Projeto" FontSize="18"
                            HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Style="{DynamicResource efeitoOpcoes}" Cursor="Hand"/>
-                
+                           Style="{DynamicResource efeitoOpcoes}" Cursor="Hand"
+                           MouseDown="AbrirMenuProjeto_MouseDown">
+                    <TextBlock.ContextMenu>
+                        <ContextMenu x:Name="MenuProjeto">
+                            <MenuItem Header="Novo" Tag="NovoProjeto" Click="OpcaoProjeto_Click" />
+                            <MenuItem Header="Abrir" Tag="AbrirProjeto" Click="OpcaoProjeto_Click" />
+                            <Separator/>
+                            <MenuItem Header="Salvar" Tag="SalvarProjeto" Click="OpcaoProjeto_Click" />
+                        </ContextMenu>
+                    </TextBlock.ContextMenu>
+                </TextBlock>
+
                 <TextBlock MouseDown="AbrirConfiguracoes_MouseDown" x:Name="abrirConfiguracoes" Grid.Column="1" Text="Configurações" FontSize="18"
                            HorizontalAlignment="Center" VerticalAlignment="Center" 
                            Style="{DynamicResource efeitoOpcoes}"/>
