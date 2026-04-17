@@ -1,57 +1,36 @@
 ﻿using Microsoft.Win32;
-using System.Runtime.CompilerServices;
+using SAV.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace SAV.Views
 {
     public partial class ConfiguracoesWindow : Window
     {
+        public ConfiguracaoWindowViewModel ViewModel => (ConfiguracaoWindowViewModel)this.DataContext;
         public ConfiguracoesWindow()
         {
             InitializeComponent();
-
-            inicializarConfiguracoes();
+            this.DataContext = new ConfiguracaoWindowViewModel();
         }
 
         // Botão trocar tema
-        private void trocarTema_Checked(object sender, EventArgs e)
+        private void BotaoTrocarTema_Click(object sender, RoutedEventArgs e)
         {
-            if (trocarTema.Content == "Claro")
+
+            if (botaoTrocarTema.Content == "Claro")
             {
-                var conversorBrush = new BrushConverter();
-
-                Application.Current.Resources["corDestaquePrimaria"] = (Brush)conversorBrush.ConvertFrom("#1B1B1B")!;
-                Application.Current.Resources["corDestaqueSecundaria"] = (Brush)conversorBrush.ConvertFrom("#F5F5F5")!;
-                Application.Current.Resources["corDestaqueTerciaria"] = (Brush)conversorBrush.ConvertFrom("#292929")!;
-                Application.Current.Resources["corFonte"] = (Brush)conversorBrush.ConvertFrom("#F5F5F5")!;
-                trocarTema.Content = "Escuro";
-
-                Properties.Settings.Default.TemaEscuro = true;
-                Properties.Settings.Default.Save();
-            }
-        }
-
-        private void trocarTema_Unchecked(object sender, EventArgs e)
-        {
-            if (trocarTema.Content == "Escuro")
+                ViewModel.AlternarTema();
+                botaoTrocarTema.Content = "Escuro";
+            } else
             {
-                var conversorBrush = new BrushConverter();
-
-                Application.Current.Resources["corDestaquePrimaria"] = (Brush)conversorBrush.ConvertFrom("#F5F5F5")!;
-                Application.Current.Resources["corDestaqueSecundaria"] = (Brush)conversorBrush.ConvertFrom("#1B1B1B")!;
-                Application.Current.Resources["corDestaqueTerciaria"] = (Brush)conversorBrush.ConvertFrom("#D4D4D4")!;
-                Application.Current.Resources["corFonte"] = (Brush)conversorBrush.ConvertFrom("#1C2639")!;
-                trocarTema.Content = "Claro";
-
-                Properties.Settings.Default.TemaEscuro = false;
-                Properties.Settings.Default.Save();
+                ViewModel.AlternarTema();
+                botaoTrocarTema.Content = "Claro";
             }
         }
 
         // Botão opções salvamento automático
-        private void botaoSalvamentoAutomatico_Click(object sender, EventArgs e)
+        private void BotaoSalvamentoAutomatico_Click(object sender, EventArgs e)
         {
             Button botaoSalvamento = sender as Button;
             botaoSalvamento.ContextMenu.IsEnabled = true;
@@ -59,85 +38,35 @@ namespace SAV.Views
             botaoSalvamento.ContextMenu.IsOpen = true;
         }
 
-        private void opcaoSalvamentoAutomatico_Click(object sender, EventArgs e)
+        // Opção escolhida no salvamento automático
+        private void OpcaoSalvamento_Click(object sender, RoutedEventArgs e)
         {
-            MenuItem item = (MenuItem)sender;
+            if (sender is MenuItem item)
+            {
+                string valorTag = item.Tag.ToString();
 
-            string opcao = item.Tag.ToString()!;
-
-            if (opcao == "5")
-            {
-                Properties.Settings.Default.TempoSalvamento = 5;
-                Properties.Settings.Default.Save();
-            } 
-            else if (opcao == "10")
-            {
-                Properties.Settings.Default.TempoSalvamento = 10;
-                Properties.Settings.Default.Save();
-            }
-            else if (opcao == "15")
-            {
-                Properties.Settings.Default.TempoSalvamento = 15;
-                Properties.Settings.Default.Save();
-            }
-            else if (opcao == "30")
-            {
-                Properties.Settings.Default.TempoSalvamento = 30;
-                Properties.Settings.Default.Save();
-            }
-            else if (opcao == "Nunca")
-            {
-                Properties.Settings.Default.TempoSalvamento = 0;
-                Properties.Settings.Default.Save();
-            }
-
-            int tempoSalvamento = Properties.Settings.Default.TempoSalvamento;
-
-            if (tempoSalvamento == 0)
-            {
-                botaoSalvamento.Content = "Nunca";
-            }
-            else
-            {
-                botaoSalvamento.Content = $"{tempoSalvamento.ToString()} minutos";
+                if (int.TryParse(valorTag, out int minutos))
+                {
+                    ViewModel.SalvamentoAutomatico = minutos;
+                }
+                else
+                {
+                    ViewModel.SalvamentoAutomatico = 0;
+                }
             }
         }
 
-        private void inicializarConfiguracoes()
-        {
-            bool temaEscuro = Properties.Settings.Default.TemaEscuro;
-            int tempoSalvamento = Properties.Settings.Default.TempoSalvamento;
-            string diretorioPadrao = Properties.Settings.Default.DiretorioPadrao;
-
-            if (tempoSalvamento == 0)
-            {
-                botaoSalvamento.Content = "Nunca";
-            }
-            else
-            {
-                botaoSalvamento.Content = $"{tempoSalvamento.ToString()} minutos";
-            }
-
-            trocarTema.IsChecked = temaEscuro;
-
-            trocarTema.Content = temaEscuro ? "Escuro" : "Claro";
-
-            textoDiretorio.Text = diretorioPadrao;
-        }
-
-        private void botaoCaminho_Click(object sender, EventArgs e)
+        // Botão selecionar diretório
+        private void BotaoEscolherDiretorio_Click(object sender, EventArgs e)
         {
             OpenFolderDialog selecionarPasta = new OpenFolderDialog();
             selecionarPasta.Title = "Selecione o diretório padrão";
 
             if (selecionarPasta.ShowDialog() == true)
             {
-                string pastaSelecionada = selecionarPasta.FolderName;
+                ((ConfiguracaoWindowViewModel)this.DataContext).DiretorioPadrao = selecionarPasta.FolderName;
 
-                Properties.Settings.Default.DiretorioPadrao = pastaSelecionada;
-                Properties.Settings.Default.Save();
-
-                textoDiretorio.Text = pastaSelecionada;
+                textoDiretorio.Text = selecionarPasta.FolderName;
             }
         }
     }

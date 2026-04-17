@@ -16,47 +16,42 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
+        
+        <!-- Tema -->
         <Grid Grid.Row="0" Margin="10">
             <Label Content="Tema" FontSize="16"
                    HorizontalAlignment="Left" VerticalAlignment="Center"
                    Foreground="{DynamicResource corFonte}" />
-            <ToggleButton x:Name="trocarTema" 
-                          Content="Claro"
-                          Style="{DynamicResource corBotaoTema}" 
-                          Cursor="Hand" BorderThickness="0" 
-                          Width="120" Height="20"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Center"
-                          Checked="trocarTema_Checked"
-                          Unchecked="trocarTema_Unchecked" FontSize="12" 
-                          Foreground="{DynamicResource corFonte}" 
-                          FontFamily="{DynamicResource fontePadrao}" />
+            <Button x:Name="botaoTrocarTema"
+                    Content="{Binding TemaEscolhido}"
+                    Style="{DynamicResource botaoPadrao}"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Click="BotaoTrocarTema_Click" />
         </Grid>
 
+        <!-- Salvamento automático -->
         <Grid Grid.Row="1" Margin="10">
             <Label Content="Salvamento automático" FontSize="16"
                    HorizontalAlignment="Left" VerticalAlignment="Center"
                    Foreground="{DynamicResource corFonte}"/>
-            <Button x:Name="botaoSalvamento"
-                    Content="Selecionar caminho"
-                    Click="botaoSalvamentoAutomatico_Click"
-                    Style="{DynamicResource botoesPadrao}"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center" Cursor="Hand">
+            <Button Content="{Binding SalvamentoAutomaticoEscolhido}"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Style="{DynamicResource botaoPadrao}"
+                    Click="BotaoSalvamentoAutomatico_Click">
                 <Button.ContextMenu>
                     <ContextMenu x:Name="MenuOpcoes">
-                        <MenuItem Header="5 minutos" Tag="5" Click="opcaoSalvamentoAutomatico_Click"/>
-                        <MenuItem Header="10 minutos" Tag="10" Click="opcaoSalvamentoAutomatico_Click"/>
-                        <MenuItem Header="15 minutos" Tag="15" Click="opcaoSalvamentoAutomatico_Click"/>
-                        <MenuItem Header="30 minutos" Tag="30" Click="opcaoSalvamentoAutomatico_Click"/>
+                        <MenuItem Header="5 minutos" Tag="5" Click="OpcaoSalvamento_Click" />
+                        <MenuItem Header="10 minutos" Tag="10" Click="OpcaoSalvamento_Click" />
+                        <MenuItem Header="15 minutos" Tag="15" Click="OpcaoSalvamento_Click" />
+                        <MenuItem Header="30 minutos" Tag="30" Click="OpcaoSalvamento_Click" />
                         <Separator />
-                        <MenuItem Header="Nunca" Tag="Nunca" Click="opcaoSalvamentoAutomatico_Click"/>
+                        <MenuItem Header="Nunca" Tag="Nunca" Click="OpcaoSalvamento_Click" />
                     </ContextMenu>
                 </Button.ContextMenu>
             </Button>
         </Grid>
 
+        <!-- Diretório padrão -->
         <Grid Grid.Row="2" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -66,17 +61,15 @@
                 <Label Content="Diretório padrão:" FontSize="16"
                        VerticalAlignment="Center"
                        Foreground="{DynamicResource corFonte}" />
-                <Button x:Name="botaoCaminho"
-                        Content="Selecionar caminho"
-                        Click="botaoCaminho_Click"
-                        Style="{DynamicResource botoesPadrao}"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"/>
+                <Button Content="Selecionar caminho"
+                        HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Style="{DynamicResource botaoPadrao}"
+                        Click="BotaoEscolherDiretorio_Click" Cursor="" />
             </Grid>
             <Grid Grid.Row="1" Background="{DynamicResource corDestaqueTerciaria}">
                 <TextBlock x:Name="textoDiretorio" 
                          Margin="5, 0" 
-                         Text="C:/"
+                         Text="{Binding DiretorioPadrao}"
                          VerticalAlignment="Center"
                          Background="Transparent"
                          FontFamily="{StaticResource fontePadrao}"

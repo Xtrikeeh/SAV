@@ -43,6 +43,7 @@
             </Style.Triggers>
         </Style>
 
+        <!-- Efeito: opção de ferramenta selecionada -->
         <Style x:Key="efeitoEditar" TargetType="Path">
             <Setter Property="Fill" Value="{DynamicResource corFonte}"/>
             <Style.Triggers>
@@ -70,23 +71,17 @@
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="corBotaoTema" TargetType="ToggleButton">
+        <!-- Botão padrão -->
+        <Style x:Key="botaoPadrao" TargetType="Button">
             <Setter Property="Background" Value="{DynamicResource corTemaPrimaria}" />
-            <Style.Triggers>
-                <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource corTemaSecundaria}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="botoesPadrao" TargetType="Button">
-            <Setter Property="Background" Value="{DynamicResource corTemaPrimaria}"/>
-            <Setter Property="FontFamily" Value="{DynamicResource fontePadrao}" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Width" Value="120" />
             <Setter Property="Height" Value="20" />
-            <Setter Property="Foreground" Value="{DynamicResource corFonte}" />
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{DynamicResource corTemaPrimaria}" />
+            <Setter Property="Background" Value="{DynamicResource corDestaquePrimaria}" />
+            <Setter Property="Foreground" Value="{DynamicResource corFonte}" />
             <Setter Property="FontFamily" Value="{DynamicResource fontePadrao}" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
@@ -94,6 +89,5 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
     </Application.Resources>
 </Application>
